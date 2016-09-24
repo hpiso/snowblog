@@ -1,0 +1,27 @@
+---
+server:
+    install: '1'
+    packages: [git]
+    timezone: Europe/Paris
+    locale: fr_FR.UTF-8
+vagrant_local:
+    install: '1'
+    vm: { base_box: jessy64, hostname: snowblog, ip: 192.168.33.99, memory: '1024', sharedfolder: ./www, syncType: nfs }
+apache:
+    install: '1'
+    docroot: /vagrant/www/web
+    servername: snowblog.local
+mysql:
+    install: '1'
+    root_password: root
+    database: snowblog
+    user: root
+    password: root
+    dump: ''
+php:
+    install: '1'
+    ppa: php5-5.6
+    packages: [php5-common, php5-curl, php5-gd, php5-imagick, php5-imap, php5-mcrypt, php5-memcache, php5-mysql, php5-sqlite, php5-pspell, php5-xsl]
+composer:
+    install: '1'
+
