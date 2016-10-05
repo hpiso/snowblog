@@ -50,7 +50,7 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
+            return $this->redirectToRoute('article_index');
         }
 
         return $this->render('AppBundle:Admin/Article:new.html.twig', array(
@@ -105,7 +105,7 @@ class ArticleController extends Controller
     /**
      * Deletes a Article entity.
      *
-     * @Route("/{id}", name="article_delete")
+     * @Route("/{id}/delete", name="article_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Article $article)
