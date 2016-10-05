@@ -13,6 +13,11 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:Front/Home:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('AppBundle:Article')->findBy(['enabled' => true], ['createdAt' => 'DESC']);
+
+        return $this->render('AppBundle:Front/Home:index.html.twig', [
+            'articles' => $articles
+        ]);
     }
 }
