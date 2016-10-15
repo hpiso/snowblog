@@ -17,6 +17,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('slug')
             ->add('description')
             ->add('category', EntityType::class, [
                 'class' => 'AppBundle:Category',

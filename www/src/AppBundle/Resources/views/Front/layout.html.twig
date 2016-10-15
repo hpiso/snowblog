@@ -50,17 +50,37 @@
             <!-- end container -->
         </div>
 
-        <div id="page-title" class="page-title has-bg">
-            <div class="bg-cover"><img src="{{ asset('assets/img/cover.jpg') }}" alt="" /></div>
-            <div class="container">
-                <h1>Official Color Admin Blog</h1>
-                <p>Blog Concept Front End Page</p>
-            </div>
-        </div>
+        {% block bgtitle %}
+        {% endblock %}
 
         <div id="content" class="content">
             <div class="container">
-                {% block body %}{% endblock %}
+
+                <div class="row row-space-30">
+                    <!-- begin col-9 -->
+                    {% block body %}{% endblock %}
+                    <!-- end col-9 -->
+                    <!-- begin col-3 -->
+                    <div class="col-md-3">
+
+                        {{ render(controller('AppBundle:Front/SideBar:categories')) }}
+
+                        {{ render(controller('AppBundle:Front/SideBar:recentPosts')) }}
+
+                        <!-- begin section-container -->
+                        <div class="section-container">
+                            <h4 class="section-title"><span>Follow Us</span></h4>
+                            <ul class="sidebar-social-list">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- end section-container -->
+                    </div>
+                    <!-- end col-3 -->
+                </div>
             </div>
         </div>
 
