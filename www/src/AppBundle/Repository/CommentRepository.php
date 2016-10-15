@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Article;
 
 /**
  * CommentRepository
@@ -10,4 +11,17 @@ namespace AppBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCommentByArticle(Article $article)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb->where('c.enabled = :enabled')
+            ->setParameter('enabled', false)
+            ->join('c.article', 'ca')
+            ->andWhere('ca = :article')
+            ->setParameter('article', $article)
+            ->orderBy('c.date', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -11,7 +11,9 @@
     <div class="post-content">
         <!-- begin post-image -->
         <div class="post-image">
-            <a href="post_detail.html"><img src="assets/img/post4.jpg" alt=""></a>
+            <a href="{{ path('front_article_show', {'slug': article.slug}) }}">
+                <img src="{{ asset('images/' ~ article.imageName) }}" alt="">
+            </a>
         </div>
         <!-- end post-image -->
         <!-- begin post-info -->

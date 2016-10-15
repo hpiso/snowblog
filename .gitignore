@@ -5,3 +5,4 @@ www/var/
 www/app/bootstrap.php.cache
 .idea
 .vagrant
+www/web/images/

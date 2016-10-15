@@ -49,7 +49,7 @@ class HomeController extends Controller
             return $this->redirectToRoute('front_article_show', ['slug' => $article->getSlug()]);
         }
 
-        $comments = $em->getRepository('AppBundle:Comment')->findBy(['enabled' => false], ['date' => 'DESC']);// todo change false
+        $comments = $em->getRepository('AppBundle:Comment')->getCommentByArticle($article);
 
         return $this->render('AppBundle:Front/Article:show.html.twig', array(
             'article'  => $article,
