@@ -4,8 +4,8 @@
         {% for article in articles %}
             <li>
                 <div class="info">
-                    <h4 class="title"><a href="#">{{ article.title }}</a></h4>
-                    <div class="date">23 December 2015</div>
+                    <h4 class="title"><a href="{{ path('front_article_show', {'slug': article.slug}) }}">{{ article.title }}</a></h4>
+                    <span class="date">{{ article.createdAt|localizeddate('medium', 'none', null) }}</span>
                 </div>
             </li>
         {% endfor %}
