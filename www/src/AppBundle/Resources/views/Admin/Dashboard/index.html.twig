@@ -19,71 +19,16 @@
         <div class="col-lg-2 col-sm-6">
             <div class="circle-tile">
                 <a href="#">
-                    <div class="circle-tile-heading dark-blue">
-                        <i class="fa fa-users fa-fw fa-3x"></i>
-                    </div>
-                </a>
-                <div class="circle-tile-content dark-blue">
-                    <div class="circle-tile-description text-faded">
-                        Users
-                    </div>
-                    <div class="circle-tile-number text-faded">
-                        265
-                        <span id="sparklineA"></span>
-                    </div>
-                    <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 col-sm-6">
-            <div class="circle-tile">
-                <a href="#">
-                    <div class="circle-tile-heading green">
-                        <i class="fa fa-money fa-fw fa-3x"></i>
-                    </div>
-                </a>
-                <div class="circle-tile-content green">
-                    <div class="circle-tile-description text-faded">
-                        Revenue
-                    </div>
-                    <div class="circle-tile-number text-faded">
-                        $32,384
-                    </div>
-                    <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 col-sm-6">
-            <div class="circle-tile">
-                <a href="#">
-                    <div class="circle-tile-heading orange">
-                        <i class="fa fa-bell fa-fw fa-3x"></i>
-                    </div>
-                </a>
-                <div class="circle-tile-content orange">
-                    <div class="circle-tile-description text-faded">
-                        Alerts
-                    </div>
-                    <div class="circle-tile-number text-faded">
-                        9 New
-                    </div>
-                    <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 col-sm-6">
-            <div class="circle-tile">
-                <a href="#">
                     <div class="circle-tile-heading blue">
                         <i class="fa fa-tasks fa-fw fa-3x"></i>
                     </div>
                 </a>
                 <div class="circle-tile-content blue">
                     <div class="circle-tile-description text-faded">
-                        Tasks
+                        Articles
                     </div>
                     <div class="circle-tile-number text-faded">
-                        10
+                        {{ articles|length }}
                         <span id="sparklineB"></span>
                     </div>
                     <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -94,15 +39,15 @@
             <div class="circle-tile">
                 <a href="#">
                     <div class="circle-tile-heading red">
-                        <i class="fa fa-shopping-cart fa-fw fa-3x"></i>
+                        <i class="fa fa-picture-o fa-fw fa-3x"></i>
                     </div>
                 </a>
                 <div class="circle-tile-content red">
                     <div class="circle-tile-description text-faded">
-                        Orders
+                        Categories
                     </div>
                     <div class="circle-tile-number text-faded">
-                        24
+                        {{ categories|length }}
                         <span id="sparklineC"></span>
                     </div>
                     <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -118,10 +63,10 @@
                 </a>
                 <div class="circle-tile-content purple">
                     <div class="circle-tile-description text-faded">
-                        Mentions
+                        Comments
                     </div>
                     <div class="circle-tile-number text-faded">
-                        96
+                        {{ comments|length }}
                         <span id="sparklineD"></span>
                     </div>
                     <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
@@ -129,5 +74,45 @@
             </div>
         </div>
     </div>
-    <!-- end DASHBOARD CIRCLE TILES -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="portlet portlet-blue">
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+                        <h4>Comments to approved</h4>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="portlet-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Author</th>
+                                <th>Comment</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for comment in commentsToApproved %}
+                                <tr>
+                                    <td>{{ comment.username }}</td>
+                                    <td>{{ comment.comment }} </td>
+                                    <td>{{ comment.date|localizeddate('medium', 'none', null) }}</td>
+                                    <td>
+                                        <a href="{{ path('comment_edit', { 'id': comment.id }) }}" class="btn btn-info"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ path('front_article_show', {'slug': comment.article.slug}) }}" class="btn btn-success"><i class="fa fa-eye"></i> Show post</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.portlet -->
+        </div>
+    </div>
 {% endblock %}

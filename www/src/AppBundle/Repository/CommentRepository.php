@@ -16,7 +16,7 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('c');
 
         $qb->where('c.enabled = :enabled')
-            ->setParameter('enabled', false)
+            ->setParameter('enabled', true)
             ->join('c.article', 'ca')
             ->andWhere('ca = :article')
             ->setParameter('article', $article)

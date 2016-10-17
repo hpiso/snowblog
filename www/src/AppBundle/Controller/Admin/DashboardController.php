@@ -13,6 +13,18 @@ class DashboardController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:Admin/Dashboard:index.html.twig');
+
+        $em = $this->getDoctrine()->getManager();
+        $articles   = $em->getRepository('AppBundle:Article')->findAll();
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        $comments   = $em->getRepository('AppBundle:Comment')->findAll();
+        $commentsToApproved   = $em->getRepository('AppBundle:Comment')->findBy(['enabled' => false]);
+
+        return $this->render('AppBundle:Admin/Dashboard:index.html.twig', [
+            'comments'   => $comments,
+            'articles'   => $articles,
+            'categories' => $categories,
+            'commentsToApproved' => $commentsToApproved,
+        ]);
     }
 }
