@@ -29,7 +29,7 @@
                 {{ article.comments.count() }} Comments
             </div>
             <div class="post-desc">
-                {{ article.description|raw }}
+                {{ article.description|truncate(200, true, '...')|raw}}
             </div>
         </div>
         <!-- end post-info -->

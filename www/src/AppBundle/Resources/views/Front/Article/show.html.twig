@@ -31,7 +31,7 @@
             <!-- begin post-desc -->
             <div class="post-desc">
                 <p>
-                    {{ article.description }}
+                    {{ article.description|raw }}
                 </p>
             </div>
             <!-- end post-desc -->
@@ -55,7 +55,7 @@
                             <div class="comment-author">
                                 {{ comment.username }}
                                         <span class="comment-date">
-                                            on <span class="underline">June 6, 2015</span> at <span class="underline">6:17 pm</span>
+                                            on <span> {{ comment.date|localizeddate('medium', 'none', null) }}</span>
                                         </span>
                             </div>
                             <div class="comment-content">

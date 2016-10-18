@@ -13,7 +13,7 @@ var AppComponent = (function () {
         this.snow = {
             id: 1,
             brand: {
-                name: 'Quiksilver',
+                name: 'QUIKSILVER',
                 color: '#2c9ad0',
             },
             color: {
