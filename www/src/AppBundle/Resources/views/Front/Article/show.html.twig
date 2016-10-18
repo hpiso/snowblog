@@ -1,104 +1,124 @@
 {% extends 'AppBundle:Front:layout.html.twig' %}
 
 {% block body %}
-        <div class="col-md-9">
-            {% for flash_message in app.session.flashBag.get('notice') %}
-                <div class="alert alert-success f-s-12">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-            <!-- begin post-detail -->
-            <div class="post-detail section-container">
-                <ul class="breadcrumb">
-                    <li><a href="{{ path('homepage') }}">Home</a></li>
-                    <li class="active">{{ article.title }}</li>
-                </ul>
-                <h4 class="post-title">
-                    <a href="#">{{ article.title }}</a>
-                </h4>
-                <div class="post-by">
-                    Posted at {{ article.createdAt|localizeddate('medium', 'none', null) }}
-                    <span class="divider">|</span>
-                    {{ article.category.name }}
-                    <span class="divider">|</span>
-                    {{ comments|length }} Comments
-                </div>
-                <!-- begin post-image -->
-                <div class="post-image">
-                    <img src="{{ asset('images/' ~ article.imageName) }}"/>
-                </div>
-                <!-- end post-image -->
-                <!-- begin post-desc -->
-                <div class="post-desc">
-                    <p>
-                        {{ article.description }}
-                    </p>
-                </div>
-                <!-- end post-desc -->
+    <div class="col-md-9">
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="alert alert-success f-s-12">
+                {{ flash_message }}
             </div>
-            <!-- end post-detail -->
-
-            <!-- begin section-container -->
-            <div class="section-container">
-                <h4 class="section-title"><span>All Comments ({{ comments|length }})</span></h4>
-                <!-- begin comment-list -->
-                <ul class="comment-list">
-                    {% for comment in comments %}
-                        <li>
-                        <!-- begin comment-avatar -->
-                        <div class="comment-avatar">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <!-- end comment-avatar -->
-                        <!-- begin comment-container -->
-                        <div class="comment-container">
-                                <div class="comment-author">
-                                    {{ comment.username }}
-                                            <span class="comment-date">
-                                                on <span class="underline">June 6, 2015</span> at <span class="underline">6:17 pm</span>
-                                            </span>
-                                </div>
-                                <div class="comment-content">
-                                    {{ comment.comment }}
-                                </div>
-                        </div>
-                        <!-- end comment-container -->
-                    </li>
-                    {% endfor %}
-                </ul>
-                <!-- end comment-list -->
+        {% endfor %}
+        <!-- begin post-detail -->
+        <div class="post-detail section-container">
+            <ul class="breadcrumb">
+                <li><a href="{{ path('homepage') }}">Home</a></li>
+                <li class="active">{{ article.title }}</li>
+            </ul>
+            <h4 class="post-title">
+                <a href="#">{{ article.title }}</a>
+            </h4>
+            <div class="post-by">
+                Posted at {{ article.createdAt|localizeddate('medium', 'none', null) }}
+                <span class="divider">|</span>
+                {{ article.category.name }}
+                <span class="divider">|</span>
+                {{ comments|length }} Comments
             </div>
-            <!-- end section-container -->
-
-            <!-- begin section-container -->
-            <div class="section-container">
-                <h4 class="section-title m-b-20"><span>Add a Comment</span></h4>
-                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                    <div class="form-group">
-                        <label class="control-label f-s-12 col-md-2">Your Name <span class="text-danger">*</span></label>
-                        <div class="col-md-10">
-                            {{ form_widget(form.username) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label f-s-12 col-md-2">Your Email <span class="text-danger">*</span></label>
-                        <div class="col-md-10">
-                            {{ form_widget(form.email) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label f-s-12 col-md-2">Comment <span class="text-danger">*</span></label>
-                        <div class="col-md-10">
-                            {{ form_widget(form.comment) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-10 col-md-offset-2">
-                            <button type="submit" class="btn btn-inverse btn-lg">Submit Comment</button>
-                        </div>
-                    </div>
-                {{ form_end(form) }}
+            <!-- begin post-image -->
+            <div class="post-image">
+                <img src="{{ asset('images/' ~ article.imageName) }}"/>
             </div>
-            <!-- end section-container -->
+            <!-- end post-image -->
+            <!-- begin post-desc -->
+            <div class="post-desc">
+                <p>
+                    {{ article.description }}
+                </p>
+            </div>
+            <!-- end post-desc -->
         </div>
+        <!-- end post-detail -->
+
+        <!-- begin section-container -->
+        <div class="section-container">
+            <h4 class="section-title"><span>All Comments ({{ comments|length }})</span></h4>
+            <!-- begin comment-list -->
+            <ul class="comment-list">
+                {% for comment in comments %}
+                    <li>
+                    <!-- begin comment-avatar -->
+                    <div class="comment-avatar">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <!-- end comment-avatar -->
+                    <!-- begin comment-container -->
+                    <div class="comment-container">
+                            <div class="comment-author">
+                                {{ comment.username }}
+                                        <span class="comment-date">
+                                            on <span class="underline">June 6, 2015</span> at <span class="underline">6:17 pm</span>
+                                        </span>
+                            </div>
+                            <div class="comment-content">
+                                {{ comment.comment }}
+                            </div>
+                    </div>
+                    <!-- end comment-container -->
+                </li>
+                {% endfor %}
+            </ul>
+            <!-- end comment-list -->
+        </div>
+        <!-- end section-container -->
+
+        <!-- begin section-container -->
+        <div class="section-container">
+            <h4 class="section-title m-b-20"><span>Add a Comment</span></h4>
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                <div class="form-group">
+                    <label class="control-label f-s-12 col-md-2">Your Name <span class="text-danger">*</span></label>
+                    <div class="col-md-10">
+                        {{ form_widget(form.username) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label f-s-12 col-md-2">Your Email <span class="text-danger">*</span></label>
+                    <div class="col-md-10">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label f-s-12 col-md-2">Comment <span class="text-danger">*</span></label>
+                    <div class="col-md-10">
+                        {{ form_widget(form.comment) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10 col-md-offset-2">
+                        <button type="submit" class="btn btn-inverse btn-lg">Submit Comment</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+        <!-- end section-container -->
+    </div>
+    <!-- begin col-3 -->
+    <div class="col-md-3">
+
+        {{ render(controller('AppBundle:Front/SideBar:categories')) }}
+
+        {{ render(controller('AppBundle:Front/SideBar:recentPosts')) }}
+
+        <!-- begin section-container -->
+        <div class="section-container">
+            <h4 class="section-title"><span>Follow Us</span></h4>
+            <ul class="sidebar-social-list">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <!-- end section-container -->
+    </div>
+    <!-- end col-3 -->
 {% endblock %}

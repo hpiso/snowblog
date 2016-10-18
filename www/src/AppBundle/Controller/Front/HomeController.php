@@ -57,4 +57,14 @@ class HomeController extends Controller
             'comments' => $comments
         ));
     }
+
+    /**
+     * Finds and displays a Article entity.
+     *
+     * @Route("/config/snow", name="front_config")
+     */
+    public function configAction()
+    {
+        return $this->render('AppBundle:Front/Config:index.html.twig');
+    }
 }

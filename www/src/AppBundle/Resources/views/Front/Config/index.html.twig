@@ -1,0 +1,36 @@
+{% extends 'AppBundle:Front:layout.html.twig' %}
+
+{% block script %}
+    <script src="{{ asset('assets/angular/node_modules/core-js/client/shim.min.js')}}"></script>
+    <script src="{{ asset('assets/angular/node_modules/zone.js/dist/zone.js')}}"></script>
+    <script src="{{ asset('assets/angular/node_modules/reflect-metadata/Reflect.js')}}"></script>
+    <script src="{{ asset('assets/angular/node_modules/systemjs/dist/system.src.js') }}"></script>
+    <!-- 2. Configure SystemJS -->
+    <script src="{{ asset('assets/angular/systemjs.config.js') }}"></script>
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
+
+    <style>
+        h2 {
+            position: absolute;
+            top: 205px;
+            left: 300px;
+            z-index: 999;
+            font-size: 50px;
+        }
+        .block {
+            width: 520px;
+            height:520px;
+            margin-bottom: 100px;
+            margin: auto;
+        }
+        svg {
+            transform: rotate(-135deg);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+        <my-app>Loading...</my-app>
+{% endblock %}
