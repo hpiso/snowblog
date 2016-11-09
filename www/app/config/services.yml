@@ -13,6 +13,17 @@ services:
          class: Twig_Extensions_Extension_Text
          tags:
              - { name: twig.extension }
+
+    app.service.sparql_service:
+        class: AppBundle\Service\SparqlService
+
+    app.command.snowboarder:
+        class: AppBundle\Command\SnowboarderCommand
+        arguments:
+            entity_manager: "@doctrine.orm.entity_manager"
+            sparql_service: "@app.service.sparql_service"
+        tags:
+            -  { name: console.command }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
