@@ -73,13 +73,13 @@ class SnowboarderCommand extends Command
 
             $this->em->persist($snowboarder);
         }
-        
+
         $this->em->flush();
     }
 
     /**
      * FILTER to get ride of all other languages
-     * OPTIONAL to get datas even if not provided (two optionals to make "OR" instead of "AND")
+     * OPTIONAL to get datas even if not provided (several OPTIONAL to make an "OR")
      *
      * @return string
      */

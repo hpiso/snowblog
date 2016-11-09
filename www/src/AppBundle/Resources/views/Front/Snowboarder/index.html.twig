@@ -7,7 +7,7 @@
             <li class="active">Best snowboarders</li>
         </ul>
 
-        <h1>Best snowboarders <small>(click to view details)</small></h1>
+        <h1>Best snowboarders <small>({{ snowboarders|length }} riders, click to view details)</small></h1>
         <div class="row">
             {% for snowboarder in snowboarders %}
                 <div class="col-md-3">
