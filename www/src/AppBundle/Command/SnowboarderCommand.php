@@ -24,9 +24,21 @@ class SnowboarderCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('app:update-snowboarders');
+            ->setName('app:update-snowboarders')
+            ->setDescription('This command update snowboarders data');
     }
 
+    /**
+     * update snowboarders data
+     *
+     * 1) Remove all snowboarders
+     * 2) Make sparQL query
+     * 3) Insert snowboarders data
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null|void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // 1)
@@ -69,5 +81,3 @@ class SnowboarderCommand extends Command
             FILTER (lang(?name) = 'en')}";
     }
 }
-
-//make url with WIKI id http://en.wikipedia.org/?curid=18630637

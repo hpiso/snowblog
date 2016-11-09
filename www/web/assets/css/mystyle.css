@@ -1,0 +1,27 @@
+.item-image {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 60%; /* here the desired aspect ratio */
+    border: 1px solid #b9b9b9;
+    border-bottom: none;
+}
+.item-image img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.item-content {
+    padding: 15px;
+    background: #FFF;
+    margin-bottom: 20px;
+    border: 1px solid #b9b9b9;
+    border-top: none;
+}
+.item-text {
+    position: relative;
+    overflow: hidden;
+    height: 20px;
+}
