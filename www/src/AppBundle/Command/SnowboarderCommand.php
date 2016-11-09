@@ -60,24 +60,44 @@ class SnowboarderCommand extends Command
             if (isset($row['thumbnail'])) {
                 $snowboarder->setThumbnail($row['thumbnail']);
             }
+
+            if (isset($row['birthDate'])) {
+
+                $format = 'Y-m-d';
+                $birthDate = \DateTime::createFromFormat($format, $row['birthDate']);
+
+                if ($birthDate) {
+                    $snowboarder->setBirthDate($birthDate);
+                }
+            }
+
             $this->em->persist($snowboarder);
         }
+        
         $this->em->flush();
     }
 
     /**
+     * FILTER to get ride of all other languages
+     * OPTIONAL to get datas even if not provided (two optionals to make "OR" instead of "AND")
+     *
      * @return string
      */
     private function getAllSnowBoardersQuery() {
         return "
-            SELECT ?description, ?name, ?thumbnail, ?wikiID
+            SELECT ?description, ?name, ?thumbnail, ?wikiID, ?birthDate
             WHERE {
                 ?person dct:subject <http://dbpedia.org/resource/Category:American_snowboarders> .
                 ?person dbo:abstract ?description .
                 ?person rdfs:label ?name .
                 ?person dbo:wikiPageID ?wikiID .
+
             OPTIONAL { ?person dbo:thumbnail ?thumbnail }
+            OPTIONAL { ?person dbp:birthDate ?birthDate }
+
             FILTER (lang(?description) = 'en')
-            FILTER (lang(?name) = 'en')}";
+            FILTER (lang(?name) = 'en')
+
+            }";
     }
 }

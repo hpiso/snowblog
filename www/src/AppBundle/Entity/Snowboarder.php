@@ -36,6 +36,13 @@ class Snowboarder
     private $wikiId;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birth_date", type="date", nullable=true)
+     */
+    private $birthDate;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="thumbnail", type="string", length=255, nullable=true)
@@ -154,6 +161,23 @@ class Snowboarder
     public function getName()
     {
         return $this->name;
+    }
+
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param \DateTime $birthDate
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
     }
 }
 
