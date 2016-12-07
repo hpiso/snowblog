@@ -1,0 +1,20 @@
+{% extends 'AppBundle:Front:layout.html.twig' %}
+
+{% block body %}
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="{{ path('homepage') }}">Home</a></li>
+            <li class="active">History</li>
+        </ul>
+
+        <h1>History / Definition</h1>
+        <div class="row">
+            {% for history in histories %}
+                <div class="col-md-12">
+                    <h4>{{ history.title }}</h4>
+                    <p>{{ history.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

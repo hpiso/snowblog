@@ -1,0 +1,4 @@
+@prefix h: <http://snowblog.local/sparql/addressbook.ttl> .
+@prefix d: <http://learningsparql.com/ns/data#> .
+
+d:1 h:description "test" ;

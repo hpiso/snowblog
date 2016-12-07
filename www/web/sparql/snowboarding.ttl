@@ -1,0 +1,4 @@
+@prefix ab: <http://historysparql.com/ns/snowboarding#> .
+@prefix d: <http://historysparql.com/ns/data#> .
+
+	d:hist ab:abstract "Snowboarding is a recreational activity and olympic sport that involves descending a slope that is covered with snow while standing on a snowboard attached to a rider's feet. The development of snowboarding was inspired by skateboarding, sledding, surfing and skiing. It was developed in the United States in the 1960s and became a Winter Olympic Sport in 1998. Its popularity (as measured by equipment sales) in the United States peaked in 2007 and has been in a decline since" .

@@ -24,6 +24,14 @@ services:
             sparql_service: "@app.service.sparql_service"
         tags:
             -  { name: console.command }
+
+    app.command.history:
+        class: AppBundle\Command\HistoryCommand
+        arguments:
+            entity_manager: "@doctrine.orm.entity_manager"
+            sparql_service: "@app.service.sparql_service"
+        tags:
+            -  { name: console.command }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

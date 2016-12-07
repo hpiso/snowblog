@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Service;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Created by PhpStorm.
@@ -12,7 +13,11 @@ class SparqlService {
 
     public function makeQuery($query) {
 
-        $db = sparql_connect('http://dbpedia.org/sparql');
+        try {
+            $db = sparql_connect('http://dbpedia.org/sparql');
+        } catch(Exception $e) {
+            throw new Exception('Connexion problem');
+        }
 
         return sparql_query($query);
     }
