@@ -14,7 +14,7 @@ class SparqlService {
     public function makeQuery($query) {
 
         try {
-            $db = sparql_connect('http://dbpedia.org/sparql');
+            sparql_connect('http://dbpedia.org/sparql');
         } catch(Exception $e) {
             throw new Exception('Connexion problem');
         }
