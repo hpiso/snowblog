@@ -31,9 +31,11 @@ class SnowboarderCommand extends Command
     /**
      * update snowboarders data
      *
-     * 1) Remove all snowboarders
-     * 2) Make sparQL query
-     * 3) Insert snowboarders data
+     * 1) Prepare to remove all snowboarders
+     * 2) Make sparQL query and get all snowboarders
+     * 3) Prepare to insert snowboarders data
+     * 4) Execute query
+     * 5) Count all data inserted
      *
      * @param InputInterface $input
      * @param OutputInterface $output
@@ -41,16 +43,20 @@ class SnowboarderCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
         // 1)
+        $output->writeln('1) Prepare to remove all snowboarders');
         $snowboarders = $this->em->getRepository('AppBundle:Snowboarder')->findAll();
         foreach ($snowboarders as $snowboarder) {
             $this->em->remove($snowboarder);
         }
 
         // 2)
+        $output->writeln('2) Make sparQL query and get all snowboarders');
         $results = $this->sparqlService->makeQuery($this->getAllSnowBoardersQuery());
 
         // 3)
+        $output->writeln('3) Prepare to insert snowboarders data');
         while ($row = sparql_fetch_array($results)) {
             $snowboarder = new Snowboarder();
             $snowboarder->setDescription($row['description']);
@@ -74,7 +80,16 @@ class SnowboarderCommand extends Command
             $this->em->persist($snowboarder);
         }
 
+        // 4)
+        $output->writeln('4) Execute query');
         $this->em->flush();
+
+        // 5)
+        $nbSnowboarders = $this->sparqlService->makeQuery($this->getCountAllSnowBoardersQuery());
+        while ($row = sparql_fetch_array($nbSnowboarders)) {
+            $output->writeln('5) ' . $row['nbSnowboarder'] . ' snowboarders added');
+        }
+
     }
 
     /**
@@ -100,4 +115,18 @@ class SnowboarderCommand extends Command
 
             }";
     }
+
+    /**
+     * Count all snowboarders
+     *
+     * @return string
+     */
+    private function getCountAllSnowBoardersQuery() {
+        return "
+            SELECT (COUNT(DISTINCT ?person) AS ?nbSnowboarder)
+            WHERE {
+                ?person dct:subject <http://dbpedia.org/resource/Category:American_snowboarders> .
+            }";
+    }
+
 }
